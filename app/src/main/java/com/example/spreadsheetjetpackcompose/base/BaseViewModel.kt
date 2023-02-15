@@ -11,6 +11,5 @@ open class BaseViewModel<STATE : BaseState>(initialState: STATE) : ViewModel() {
     val state = _state.asStateFlow()
 
     val currentState: STATE get() = state.value
-
     fun setState(update: STATE.() -> STATE) = _state.updateAndGet(update)
 }

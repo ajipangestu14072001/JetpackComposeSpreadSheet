@@ -1,5 +1,6 @@
 package com.example.spreadsheetjetpackcompose.view.main.screen
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.example.spreadsheetjetpackcompose.navigation.Screen
 import com.example.spreadsheetjetpackcompose.utils.Loading
 import com.example.spreadsheetjetpackcompose.utils.ReusableButton
 import com.example.spreadsheetjetpackcompose.utils.ReusableTextField
@@ -24,12 +27,16 @@ import com.example.spreadsheetjetpackcompose.view.main.viewmodel.ViewModelSpread
 import kotlinx.coroutines.launch
 import java.util.*
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
-fun MainScreen(vm: ViewModelSpreadSheet = hiltViewModel()) {
+fun MainScreen(
+    navController: NavHostController,
+    vm: ViewModelSpreadSheet = hiltViewModel()
+) {
     val state by vm.state.collectAsState()
-    val (name, setName) = remember { mutableStateOf("") }
-    val (path, setPath) = remember { mutableStateOf("") }
-    var showDialog by remember { mutableStateOf(false) }
+    val (name, setName) = remember { mutableStateOf(value = "") }
+    val (path, setPath) = remember { mutableStateOf(value = "") }
+    var showDialog by remember { mutableStateOf(value = false) }
     val isValidate by derivedStateOf { name.isNotBlank() && path.isNotBlank() }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current as Activity
@@ -41,10 +48,9 @@ fun MainScreen(vm: ViewModelSpreadSheet = hiltViewModel()) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
-                }
-
+//                IconButton(onClick = {}) {
+//                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
+//                }
                 Text(
                     text = "CRUD Google Sheet",
                     fontWeight = FontWeight.Bold,
@@ -67,18 +73,28 @@ fun MainScreen(vm: ViewModelSpreadSheet = hiltViewModel()) {
         }
 
         Card(modifier = Modifier.fillMaxWidth(), backgroundColor = White) {
-            ReusableButton(
-                text = "Tambah Data",
-                onClick = {
-                    scope.launch {
-                        showDialog = true
-                        vm.getAddData(action = "insert", idLokasi = UUID.randomUUID().toString(), namaLokasi = name, pathPhoto = path)
-                        Toast.makeText(context, state.add?.body().toString(), Toast.LENGTH_SHORT).show()
-                        showDialog = state.isLoading
-                    }
-                },
-                enabled = isValidate
-            )
+            Column {
+                ReusableButton(
+                    text = "Tambah Data",
+                    onClick = {
+                        scope.launch {
+                            showDialog = true
+                            vm.getAddData(action = "insert", idLokasi = UUID.randomUUID().toString(), namaLokasi = name, pathPhoto = path)
+                            Toast.makeText(context, state.result?.body().toString(), Toast.LENGTH_SHORT).show()
+                            showDialog = state.isLoading
+                        }
+                    },
+                    enabled = isValidate
+                )
+                ReusableButton(
+                    text = "Lihat Data",
+                    onClick = {
+                        scope.launch {
+                            navController.navigate(Screen.AllData.route)
+                        }
+                    },
+                )
+            }
         }
     }
 }

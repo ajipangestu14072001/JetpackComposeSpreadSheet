@@ -3,11 +3,15 @@ package com.example.spreadsheetjetpackcompose.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.spreadsheetjetpackcompose.impl.ApiHelperImpl
+import com.example.spreadsheetjetpackcompose.network.ApiHelper
 import com.example.spreadsheetjetpackcompose.utils.Constant
 import com.example.spreadsheetjetpackcompose.network.ApiServices
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -16,9 +20,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
-object HiltModules {
+@InstallIn(SingletonComponent::class)
+object HiltModule {
     @Singleton
     @Provides
     fun providesHttpLoggingInterceptor() = HttpLoggingInterceptor()
@@ -38,9 +42,9 @@ object HiltModules {
             .addInterceptor(
                 ChuckerInterceptor.Builder(appContext)
                     .collector(ChuckerCollector(appContext))
-                    .maxContentLength(250000L)
+                    .maxContentLength(length = 250000L)
                     .redactHeaders(emptySet())
-                    .alwaysReadResponseBody(false)
+                    .alwaysReadResponseBody(enable = false)
                     .build()
             )
             .build()
@@ -56,6 +60,13 @@ object HiltModules {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiServices = retrofit.create(ApiServices::class.java)
-
-
 }
+
+@Module
+@InstallIn(ViewModelComponent::class)
+abstract class RepoModule {
+    @Binds
+    abstract fun bindRemoteDS(remoteDsImpl: ApiHelperImpl): ApiHelper
+}
+
+

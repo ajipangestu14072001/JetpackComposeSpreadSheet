@@ -1,18 +1,27 @@
 package com.example.spreadsheetjetpackcompose.network
 
+import com.example.spreadsheetjetpackcompose.model.AllDataResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiServices {
-    @POST("exec?")
     @FormUrlEncoded
-    suspend fun getAddData(
-        @Field("action") action: String,
-        @Field("idLokasi") idLokasi: String,
-        @Field("namaLokasi") namaLokasi: String,
-        @Field("pathPhoto") pathPhoto: String
-    ): Response<Any>
+    @POST("exec?")
+    suspend fun addData(@FieldMap params: Map<String, String>): Response<Any>
 
+    @FormUrlEncoded
+    @POST("exec?")
+    suspend fun allData(@Field("action") action: String): AllDataResponse
+
+    @FormUrlEncoded
+    @POST("exec?")
+    suspend fun deleteData(@FieldMap params: Map<String, String>): Response<Any>
+
+    @FormUrlEncoded
+    @POST("exec?")
+    suspend fun readData(@FieldMap params: Map<String, String>): Response<Any>
+
+    @FormUrlEncoded
+    @POST("exec?")
+    suspend fun updateData(@FieldMap params: Map<String, String>): Response<Any>
 }
