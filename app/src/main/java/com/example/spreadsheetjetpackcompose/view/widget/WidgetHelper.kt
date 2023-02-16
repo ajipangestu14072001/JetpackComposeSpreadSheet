@@ -68,15 +68,17 @@ fun ReusableButton(
     backgroundColor: Color = Color(color = 0xFFFF74B1),
     shape: Shape = RoundedCornerShape(15.dp),
     enabled: Boolean = true,
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 20.dp)
+        .padding(horizontal = 20.dp),
+    contentPadding: PaddingValues = PaddingValues(vertical = 14.dp)
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 20.dp)
-            .padding(horizontal = 20.dp),
-        contentPadding = PaddingValues(vertical = 14.dp),
+        modifier = modifier,
+        contentPadding = contentPadding,
         elevation = ButtonDefaults.elevation(),
         shape = shape,
         enabled = enabled,

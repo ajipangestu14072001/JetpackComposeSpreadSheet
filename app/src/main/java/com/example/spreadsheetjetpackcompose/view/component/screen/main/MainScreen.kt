@@ -18,11 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.spreadsheetjetpackcompose.navigation.Screen
+import com.example.spreadsheetjetpackcompose.view.component.viewmodel.ViewModelSpreadSheet
 import com.example.spreadsheetjetpackcompose.view.widget.Loading
 import com.example.spreadsheetjetpackcompose.view.widget.ReusableButton
 import com.example.spreadsheetjetpackcompose.view.widget.ReusableTextField
-import com.example.spreadsheetjetpackcompose.view.component.viewmodel.ViewModelSpreadSheet
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -67,9 +66,11 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ReusableTextField(value = name, onValueChange = setName, placeholder = "Nama Lokasi")
-            Spacer(modifier = Modifier.height(20.dp))
             ReusableTextField(value = path, onValueChange = setPath, placeholder = "Path Photo")
+            ImageSelector()
         }
+
+
 
         Card(modifier = Modifier.fillMaxWidth(), backgroundColor = White) {
             Column {
@@ -78,22 +79,30 @@ fun MainScreen(
                     onClick = {
                         scope.launch {
                             showDialog = true
-                            vm.getAddData(action = "insert", idLokasi = UUID.randomUUID().toString(), namaLokasi = name, pathPhoto = path)
-                            Toast.makeText(context, state.result?.body().toString(), Toast.LENGTH_SHORT).show()
+                            vm.getAddData(
+                                action = "insert",
+                                idLokasi = UUID.randomUUID().toString(),
+                                namaLokasi = name,
+                                pathPhoto = path
+                            )
+                            Toast.makeText(
+                                context,
+                                state.result?.body().toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             showDialog = state.isLoading
                         }
                     },
                     enabled = isValidate
                 )
-                ReusableButton(
-                    text = "Lihat Data",
-                    onClick = {
-                        scope.launch {
-                            navController.navigate(Screen.AllData.route)
-                        }
-                    },
-                )
             }
         }
     }
 }
+
+
+
+
+
+
+
