@@ -1,6 +1,5 @@
-package com.example.spreadsheetjetpackcompose.view.main.screen
+package com.example.spreadsheetjetpackcompose.view.component.screen.main
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -20,14 +19,13 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.spreadsheetjetpackcompose.navigation.Screen
-import com.example.spreadsheetjetpackcompose.utils.Loading
-import com.example.spreadsheetjetpackcompose.utils.ReusableButton
-import com.example.spreadsheetjetpackcompose.utils.ReusableTextField
-import com.example.spreadsheetjetpackcompose.view.main.viewmodel.ViewModelSpreadSheet
+import com.example.spreadsheetjetpackcompose.view.widget.Loading
+import com.example.spreadsheetjetpackcompose.view.widget.ReusableButton
+import com.example.spreadsheetjetpackcompose.view.widget.ReusableTextField
+import com.example.spreadsheetjetpackcompose.view.component.viewmodel.ViewModelSpreadSheet
 import kotlinx.coroutines.launch
 import java.util.*
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun MainScreen(
     navController: NavHostController,
@@ -37,7 +35,7 @@ fun MainScreen(
     val (name, setName) = remember { mutableStateOf(value = "") }
     val (path, setPath) = remember { mutableStateOf(value = "") }
     var showDialog by remember { mutableStateOf(value = false) }
-    val isValidate by derivedStateOf { name.isNotBlank() && path.isNotBlank() }
+    val isValidate = name.isNotBlank() && path.isNotBlank()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current as Activity
     if (showDialog) Loading()
@@ -48,9 +46,10 @@ fun MainScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-//                IconButton(onClick = {}) {
-//                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
-//                }
+                IconButton(onClick = {}) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
+                }
+
                 Text(
                     text = "CRUD Google Sheet",
                     fontWeight = FontWeight.Bold,

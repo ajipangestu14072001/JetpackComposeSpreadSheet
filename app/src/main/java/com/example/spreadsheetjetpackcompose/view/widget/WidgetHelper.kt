@@ -1,6 +1,5 @@
-package com.example.spreadsheetjetpackcompose.utils
+package com.example.spreadsheetjetpackcompose.view.widget
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -62,24 +61,22 @@ fun ReusableTextField(
     Spacer(modifier = Modifier.height(20.dp))
 }
 
-@SuppressLint("ModifierParameter")
 @Composable
 fun ReusableButton(
     text: String,
     onClick: () -> Unit,
-    backgroundColor: Color = Color(0xFFFF74B1),
+    backgroundColor: Color = Color(color = 0xFFFF74B1),
     shape: Shape = RoundedCornerShape(15.dp),
     enabled: Boolean = true,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 20.dp)
-        .padding(horizontal = 20.dp),
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
-        modifier = modifier,
-        contentPadding = PaddingValues(vertical = 20.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 20.dp)
+            .padding(horizontal = 20.dp),
+        contentPadding = PaddingValues(vertical = 14.dp),
         elevation = ButtonDefaults.elevation(),
         shape = shape,
         enabled = enabled,

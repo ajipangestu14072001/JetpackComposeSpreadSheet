@@ -1,8 +1,8 @@
-package com.example.spreadsheetjetpackcompose.view.main.viewmodel
+package com.example.spreadsheetjetpackcompose.view.component.viewmodel
 
 import com.example.spreadsheetjetpackcompose.base.BaseViewModel
 import com.example.spreadsheetjetpackcompose.network.ApiHelper
-import com.example.spreadsheetjetpackcompose.view.main.state.StateSpreadsheet
+import com.example.spreadsheetjetpackcompose.view.component.state.StateSpreadsheet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

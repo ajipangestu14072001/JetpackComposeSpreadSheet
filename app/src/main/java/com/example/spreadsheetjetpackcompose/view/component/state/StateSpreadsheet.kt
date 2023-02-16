@@ -1,4 +1,4 @@
-package com.example.spreadsheetjetpackcompose.view.main.state
+package com.example.spreadsheetjetpackcompose.view.component.state
 
 import androidx.compose.runtime.Immutable
 import com.example.spreadsheetjetpackcompose.base.BaseState
