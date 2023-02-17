@@ -1,21 +1,24 @@
 package com.example.spreadsheetjetpackcompose.view.widget
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.spreadsheetjetpackcompose.R
 
 @Composable
 fun Loading() = Dialog(
@@ -89,5 +92,41 @@ fun ReusableButton(
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold
         )
+    }
+}
+
+@Composable
+fun GoogleSignInButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    text: String = "Sign in with Google",
+    textColor: Color = White,
+    backgroundColor: Color = Color.Black,
+    imageResource: Int = R.drawable.google_logo,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            contentPadding = PaddingValues(vertical = 10.dp),
+            onClick = onClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
+            shape = RoundedCornerShape(10.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = backgroundColor,
+                contentColor = textColor
+            )
+        ) {
+            Image(
+                painter = painterResource(id = imageResource),
+                contentDescription = "",
+                modifier = Modifier.size(width = 24.dp, height = 24.dp)
+            )
+            Text(text = text, modifier = Modifier.padding(6.dp))
+        }
     }
 }

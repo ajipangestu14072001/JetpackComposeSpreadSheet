@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "263773166691",
+    "project_id": "spreadsheetjetpackcompose",
+    "storage_bucket": "spreadsheetjetpackcompose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263773166691:android:173eee29d361d15197ec56",
+        "android_client_info": {
+          "package_name": "com.example.spreadsheetjetpackcompose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263773166691-26gahq2mddir41l9nf7lb25vorss343c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spreadsheetjetpackcompose",
+            "certificate_hash": "6aa31fb1633ccaea979d8599b86794177d0b87f8"
+          }
+        },
+        {
+          "client_id": "263773166691-bsp4havcpiqq01r9p2m77p4f1i56nl1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ZTxk9KJBPuDX6n54O2KqySWDufgg2zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263773166691-20sq8j52o38v7i90kvtiefad5s1ne3k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

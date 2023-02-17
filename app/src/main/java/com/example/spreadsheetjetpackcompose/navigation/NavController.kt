@@ -5,9 +5,11 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.spreadsheetjetpackcompose.view.component.screen.all.AllDataScreen
+import com.example.spreadsheetjetpackcompose.view.component.screen.auth.AuthScreen
 import com.example.spreadsheetjetpackcompose.view.component.screen.dashboard.DashBoardScreen
 import com.example.spreadsheetjetpackcompose.view.component.screen.edit.EditScreen
 import com.example.spreadsheetjetpackcompose.view.component.screen.main.MainScreen
+import com.example.spreadsheetjetpackcompose.view.component.screen.profile.DetailProfile
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 
@@ -33,6 +35,14 @@ fun NavController(
 
         composable(route = Screen.DashBoard.route) {
             DashBoardScreen(navController = navController)
+        }
+
+        composable(route = Screen.Auth.route) {
+            AuthScreen(navController = navController)
+        }
+
+        composable(route = Screen.Profile.route) {
+            DetailProfile(navController = navController)
         }
     }
 

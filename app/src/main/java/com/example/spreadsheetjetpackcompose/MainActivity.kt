@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberAnimatedNavController()
                     NavController(
                         navController = navController,
-                        startDestination = Screen.Main.route
+                        startDestination = Screen.Auth.route
                     )
             }
         }
