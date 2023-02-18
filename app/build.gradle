@@ -83,6 +83,8 @@ dependencies {
     implementation"com.github.CanHub:Android-Image-Cropper:4.0.0"
     implementation 'com.github.stevdza-san:OneTapCompose:1.0.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
 
 

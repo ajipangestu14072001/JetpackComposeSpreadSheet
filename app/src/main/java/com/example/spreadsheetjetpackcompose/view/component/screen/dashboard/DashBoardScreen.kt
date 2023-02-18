@@ -33,13 +33,18 @@ import com.example.spreadsheetjetpackcompose.model.Destination
 import com.example.spreadsheetjetpackcompose.navigation.Screen
 import com.example.spreadsheetjetpackcompose.ui.theme.*
 import com.example.spreadsheetjetpackcompose.utils.standardQuadFromTo
+import com.example.spreadsheetjetpackcompose.view.component.screen.auth.firebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 @ExperimentalFoundationApi
 @Composable
-fun DashBoardScreen(navController: NavHostController) {
+fun DashBoardScreen(
+    navController: NavHostController,
+    user: FirebaseUser? = firebaseAuth.currentUser
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(Modifier.padding(10.dp)) {
-            GreetingSection()
+            GreetingSection(user = user!!, navController = navController)
             ChipSection(listOf("Wisata Sejarah", "Wisata Alam", "Wisata Religi", "Wisata Pendidikan"))
             SuggestionSection(navController)
             CourseSection(

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,9 +24,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.example.spreadsheetjetpackcompose.R
+import com.example.spreadsheetjetpackcompose.navigation.Screen
 import com.example.spreadsheetjetpackcompose.utils.BottomCardShape
 import com.example.spreadsheetjetpackcompose.utils.firebaseAuthWithGoogle
 import com.example.spreadsheetjetpackcompose.utils.signInWithGoogle
+import com.example.spreadsheetjetpackcompose.view.component.screen.dashboard.DashBoardScreen
 import com.example.spreadsheetjetpackcompose.view.component.screen.profile.DetailProfile
 import com.example.spreadsheetjetpackcompose.view.widget.GoogleSignInButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 val firebaseAuth = FirebaseAuth.getInstance()
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AuthScreen(
     navController: NavHostController
@@ -136,7 +140,9 @@ fun AuthScreen(
                                         .fillMaxWidth()
                                 )
                             } else {
-                                DetailProfile(navController = navController)
+//                                DetailProfile(navController = navController)
+                                navController.navigate(Screen.DashBoard.route)
+//                                DashBoardScreen(navController = navController)
                             }
                         }
                     }
