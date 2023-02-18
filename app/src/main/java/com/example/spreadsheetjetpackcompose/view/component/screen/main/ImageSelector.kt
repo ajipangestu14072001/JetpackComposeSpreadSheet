@@ -97,21 +97,21 @@ fun ImageSelector() {
         ReusableButton(
             text = "Unggah Gambar",
             onClick = {
-                showLoading = true
-                if (imageUri != null) {
-                    val fileName = "${System.currentTimeMillis()}_${imageUri?.lastPathSegment}"
-                    val uploadTask = storageRef.child(fileName).putFile(imageUri!!)
-                    uploadTask.addOnSuccessListener {
-                        storageRef.child(fileName).downloadUrl.addOnSuccessListener { uri ->
-                            realtimeDatabaseRef.child("images").push().setValue(uri.toString())
-                        }
-                        showLoading = false
-                        Toast.makeText(context, "Upload berhasil", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener {
-                        Toast.makeText(context, "Upload gagal", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
+                if (imageUri == null) {
                     Toast.makeText(context, "Belum ada gambar yang dipilih", Toast.LENGTH_SHORT).show()
+                    return@ReusableButton
+                }
+                showLoading = true
+                val fileName = "${System.currentTimeMillis()}_${imageUri!!.lastPathSegment}"
+                val uploadTask = storageRef.child(fileName).putFile(imageUri!!)
+                uploadTask.addOnSuccessListener {
+                    storageRef.child(fileName).downloadUrl.addOnSuccessListener { uri ->
+                        realtimeDatabaseRef.child("images").push().setValue(uri.toString())
+                    }
+                    showLoading = false
+                    Toast.makeText(context, "Upload berhasil", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener {
+                    Toast.makeText(context, "Upload gagal", Toast.LENGTH_SHORT).show()
                 }
             },
             modifier = Modifier.fillMaxWidth()
