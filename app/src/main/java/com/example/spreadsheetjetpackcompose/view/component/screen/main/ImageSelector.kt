@@ -97,13 +97,13 @@ fun ImageSelector() {
         ReusableButton(
             text = "Unggah Gambar",
             onClick = {
+                showLoading = true
                 if (imageUri != null) {
                     val fileName = "${System.currentTimeMillis()}_${imageUri?.lastPathSegment}"
                     val uploadTask = storageRef.child(fileName).putFile(imageUri!!)
                     uploadTask.addOnSuccessListener {
                         storageRef.child(fileName).downloadUrl.addOnSuccessListener { uri ->
                             realtimeDatabaseRef.child("images").push().setValue(uri.toString())
-                            showLoading = true
                         }
                         showLoading = false
                         Toast.makeText(context, "Upload berhasil", Toast.LENGTH_SHORT).show()
